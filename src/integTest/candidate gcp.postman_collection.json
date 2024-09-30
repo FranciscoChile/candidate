@@ -1,0 +1,295 @@
+{
+	"info": {
+		"_postman_id": "3f5d922a-052f-4817-acef-aa29f577c5f3",
+		"name": "candidate gcp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37009588"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"francisco\",\n    \"password\": \"pancho\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://academic-genius-429303-r2.uc.r.appspot.com/api/candidate/register",
+					"protocol": "https",
+					"host": [
+						"academic-genius-429303-r2",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"candidate",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"francisco\",\n    \"password\": \"pancho\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://academic-genius-429303-r2.uc.r.appspot.com/api/candidate/login",
+					"protocol": "https",
+					"host": [
+						"academic-genius-429303-r2",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"candidate",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findAll",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTcHJpbmdTZWN1cml0eUV4YW1wbGUiLCJzdWIiOiJmcmFuY2lzY28iLCJpYXQiOjE3Mjc2NzAwMTMsImV4cCI6MTcyNzc1NjQxMywidXNlcm5hbWUiOiJmcmFuY2lzY28iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dfQ.Zo0Pe3Kch4l28g_VDffWV2kjFbPGGYV8vHeKUNnbzMg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://academic-genius-429303-r2.uc.r.appspot.com/api/candidate",
+					"protocol": "https",
+					"host": [
+						"academic-genius-429303-r2",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"candidate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTcHJpbmdTZWN1cml0eUV4YW1wbGUiLCJzdWIiOiJmcmFuY2lzY28iLCJpYXQiOjE3Mjc2NzAwMTMsImV4cCI6MTcyNzc1NjQxMywidXNlcm5hbWUiOiJmcmFuY2lzY28iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dfQ.Zo0Pe3Kch4l28g_VDffWV2kjFbPGGYV8vHeKUNnbzMg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://academic-genius-429303-r2.uc.r.appspot.com/api/candidate/3",
+					"protocol": "https",
+					"host": [
+						"academic-genius-429303-r2",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"candidate",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add candidate",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTcHJpbmdTZWN1cml0eUV4YW1wbGUiLCJzdWIiOiJmcmFuY2lzY28iLCJpYXQiOjE3Mjc2NzAwMTMsImV4cCI6MTcyNzc1NjQxMywidXNlcm5hbWUiOiJmcmFuY2lzY28iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dfQ.Zo0Pe3Kch4l28g_VDffWV2kjFbPGGYV8vHeKUNnbzMg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"johndoe@example.com\",\n    \"gender\": \"MALE\",\n    \"salaryExpected\": \"60000\",\n    \"workModel\": \"REMOTE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://academic-genius-429303-r2.uc.r.appspot.com/api/candidate",
+					"protocol": "https",
+					"host": [
+						"academic-genius-429303-r2",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"candidate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit candidate",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTcHJpbmdTZWN1cml0eUV4YW1wbGUiLCJzdWIiOiJmcmFuY2lzY28iLCJpYXQiOjE3Mjc2NzAwMTMsImV4cCI6MTcyNzc1NjQxMywidXNlcm5hbWUiOiJmcmFuY2lzY28iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dfQ.Zo0Pe3Kch4l28g_VDffWV2kjFbPGGYV8vHeKUNnbzMg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 6,\n    \"name\": \"Fernando\",\n    \"email\": \"johndoe@example.com\",\n    \"gender\": \"MALE\",\n    \"salaryExpected\": \"60000\",\n    \"workModel\": \"REMOTE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://academic-genius-429303-r2.uc.r.appspot.com/api/candidate",
+					"protocol": "https",
+					"host": [
+						"academic-genius-429303-r2",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"candidate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTcHJpbmdTZWN1cml0eUV4YW1wbGUiLCJzdWIiOiJmcmFuY2lzY28iLCJpYXQiOjE3Mjc2NjQxNDksImV4cCI6MTcyNzc1MDU0OSwidXNlcm5hbWUiOiJmcmFuY2lzY28iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dfQ.-L7ftEl9xD-hmrsuOzJWaXph10FzYqWZ5dhzK4nL4rk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://academic-genius-429303-r2.uc.r.appspot.com/api/candidate/1",
+					"protocol": "https",
+					"host": [
+						"academic-genius-429303-r2",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"candidate",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "load data",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTcHJpbmdTZWN1cml0eUV4YW1wbGUiLCJzdWIiOiJmcmFuY2lzY28iLCJpYXQiOjE3Mjc2NzAwMTMsImV4cCI6MTcyNzc1NjQxMywidXNlcm5hbWUiOiJmcmFuY2lzY28iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dfQ.Zo0Pe3Kch4l28g_VDffWV2kjFbPGGYV8vHeKUNnbzMg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://academic-genius-429303-r2.uc.r.appspot.com/api/candidate/load",
+					"protocol": "https",
+					"host": [
+						"academic-genius-429303-r2",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"candidate",
+						"load"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
