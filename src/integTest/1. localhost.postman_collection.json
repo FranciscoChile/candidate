@@ -1,0 +1,212 @@
+{
+	"info": {
+		"_postman_id": "0778a6bf-e700-4f41-b2f3-2101e3301623",
+		"name": "1. localhost",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37009588"
+	},
+	"item": [
+		{
+			"name": "1. load data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/calculator/load-data",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"calculator",
+						"load-data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Addition",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"values\": [1,1],\n    \"userId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/calculator/add",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"calculator",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subtraction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"values\": [1,1],\n    \"userId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/calculator/sub",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"calculator",
+						"sub"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Random string API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.random.org/strings/?num=1&len=32&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain&rnd=new",
+					"protocol": "https",
+					"host": [
+						"www",
+						"random",
+						"org"
+					],
+					"path": [
+						"strings",
+						""
+					],
+					"query": [
+						{
+							"key": "num",
+							"value": "1"
+						},
+						{
+							"key": "len",
+							"value": "32"
+						},
+						{
+							"key": "digits",
+							"value": "on"
+						},
+						{
+							"key": "upperalpha",
+							"value": "on"
+						},
+						{
+							"key": "loweralpha",
+							"value": "on"
+						},
+						{
+							"key": "unique",
+							"value": "on"
+						},
+						{
+							"key": "format",
+							"value": "plain"
+						},
+						{
+							"key": "rnd",
+							"value": "new"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Random String",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/calculator/random",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"calculator",
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user records",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/calculator",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"calculator"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete ",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/calculator/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"calculator",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

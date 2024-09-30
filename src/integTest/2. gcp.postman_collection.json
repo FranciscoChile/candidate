@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "c94a5df0-eab4-4a99-bef3-862ea92eacd4",
+		"name": "2. gcp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37009588"
+	},
+	"item": [
+		{
+			"name": "1. load data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://academic-genius-429303-r2.uc.r.appspot.com/api/calculator/load-data",
+					"protocol": "https",
+					"host": [
+						"academic-genius-429303-r2",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"calculator",
+						"load-data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Addition",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"values\": [1,1],\n    \"userId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://academic-genius-429303-r2.uc.r.appspot.com/api/calculator/add",
+					"protocol": "https",
+					"host": [
+						"academic-genius-429303-r2",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"calculator",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subtraction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"values\": [1,1],\n    \"userId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://academic-genius-429303-r2.uc.r.appspot.com/api/calculator/sub",
+					"protocol": "https",
+					"host": [
+						"academic-genius-429303-r2",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"calculator",
+						"sub"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Random string API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.random.org/strings/?num=1&len=32&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain&rnd=new",
+					"protocol": "https",
+					"host": [
+						"www",
+						"random",
+						"org"
+					],
+					"path": [
+						"strings",
+						""
+					],
+					"query": [
+						{
+							"key": "num",
+							"value": "1"
+						},
+						{
+							"key": "len",
+							"value": "32"
+						},
+						{
+							"key": "digits",
+							"value": "on"
+						},
+						{
+							"key": "upperalpha",
+							"value": "on"
+						},
+						{
+							"key": "loweralpha",
+							"value": "on"
+						},
+						{
+							"key": "unique",
+							"value": "on"
+						},
+						{
+							"key": "format",
+							"value": "plain"
+						},
+						{
+							"key": "rnd",
+							"value": "new"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Random String",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://academic-genius-429303-r2.uc.r.appspot.com/api/calculator/random",
+					"protocol": "https",
+					"host": [
+						"academic-genius-429303-r2",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"calculator",
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user records",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://academic-genius-429303-r2.uc.r.appspot.com/api/calculator",
+					"protocol": "https",
+					"host": [
+						"academic-genius-429303-r2",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"calculator"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete ",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://academic-genius-429303-r2.uc.r.appspot.com/api/calculator/1",
+					"protocol": "https",
+					"host": [
+						"academic-genius-429303-r2",
+						"uc",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"calculator",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

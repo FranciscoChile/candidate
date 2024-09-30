@@ -1,0 +1,16 @@
+runtime: java
+env : flex
+inbound_services: 
+- warmup
+derived_file_type:
+- java_precompiled
+
+runtime_config:
+    operating_system: "ubuntu22"
+    runtime_version: "17"
+
+instance_class: F1
+
+automatic_scaling:
+    min_num_instances: 1
+    max_num_instances: 1
