@@ -1,125 +1,133 @@
 package com.pancho.demo;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import java.util.List;
-
-import com.pancho.demo.model.Candidate;
-import com.pancho.demo.model.CandidateRequest;
+import com.pancho.demo.config.TokenProvider;
+import com.pancho.demo.model.*;
+import com.pancho.demo.persistence.AuthorityRepository;
+import com.pancho.demo.persistence.CandidateRepository;
+import com.pancho.demo.persistence.UserRepository;
 import com.pancho.demo.service.CandidateService;
-import com.pancho.demo.web.CandidateController;
-import org.hamcrest.Matchers;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.pancho.demo.model.APIResponse;
+import java.util.Optional;
 
-@WebMvcTest(value = CandidateController.class)
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
 class DemoApplicationTests {
 
-	@Autowired
-    private MockMvc mvc;
-
-    @MockBean
+    @InjectMocks
     private CandidateService candidateService;
 
-    @Test
-    public void listAll_whenGetMethod()
-            throws Exception {
+    @Mock
+    private CandidateRepository candidateRepository;
 
-        Candidate ro = new Candidate();
-        Iterable<Candidate> list = List.of(ro);
-        when(candidateService.findAll() ).thenReturn(list);
+    @Mock
+    private AuthorityRepository authorityRepository;
 
-        RequestBuilder request = MockMvcRequestBuilders
-                .get("/api/candidate")
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .accept(MediaType.APPLICATION_JSON);
+    @Mock
+    private UserRepository userRepository;
 
-        MvcResult result = mvc.perform(request)
-                .andExpect(status().isOk())
-				.andReturn();
+    @Mock
+    private TokenProvider tokenProvider;
 
-        assertNotNull(result.getResponse().getContentAsString());
+    @Mock
+    private AuthenticationManager authenticationManager;
 
+    @Mock
+    private PasswordEncoder passwordEncoder;
+
+    private Candidate candidate;
+    private User user;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        candidate = new Candidate(1L, "pancho", "email", Gender.MALE, "3000", WorkModel.REMOTE);
+        user = new User(1L, "username", "password", null);
     }
 
+    @Test
+    void testFindById() {
+        when(candidateRepository.findById(1L)).thenReturn(Optional.of(candidate));
+        Optional<CandidateDTO> foundCandidate = candidateService.findById(1L);
+        assert(foundCandidate.isPresent());
+        assertEquals("pancho", foundCandidate.get().getName());
+    }
 
-		@Test
-    	public void create_whenPostMethod()
-            throws Exception {
+    @Test
+    void testSave() {
+        CandidateRequest request = new CandidateRequest(null, "pancho", "email", Gender.MALE, "3000", WorkModel.REMOTE);
+        when(candidateRepository.save(Mockito.any(Candidate.class))).thenReturn(candidate);
 
-        CandidateRequest candidateRequest = CandidateRequest.builder().name("").email("").build();
+        CandidateDTO savedCandidate = candidateService.save(request);
 
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-		String requestJson=ow.writeValueAsString(candidateRequest);
+        assertNotNull(savedCandidate);
+        assertEquals("pancho", savedCandidate.getName());
+    }
 
-            APIResponse apiResponse = new APIResponse();
-            apiResponse.setData("response");
-            apiResponse.setResponseCode(HttpStatus.OK);
-            apiResponse.setMessage("Successfully executed");
+    @Test
+    void testDelete() {
+        doNothing().when(candidateRepository).deleteById(1L);
+        candidateService.delete(1L);
+        verify(candidateRepository, times(1)).deleteById(1L);
+    }
 
-        RequestBuilder request = MockMvcRequestBuilders
-                .post("/api/candidate")
-				.content(requestJson)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .accept(MediaType.APPLICATION_JSON);
+    @Test
+    void testRegisterUser_Success() {
+        when(userRepository.findByUsername("username")).thenReturn(Optional.empty());
+        when(passwordEncoder.encode("password")).thenReturn("hashedPassword");
+        when(userRepository.save(Mockito.any(User.class))).thenReturn(user);
 
-        MvcResult result = mvc.perform(request)
-                .andExpect(status().is2xxSuccessful())        
-				.andExpect(jsonPath("$.message", Matchers.is("Successfully executed")))
-				.andReturn();
-					
-        assertNotNull(result.getResponse().getContentAsString());
-				
-        }
+        User registeredUser = candidateService.registerUser(user);
 
+        assertNotNull(registeredUser);
+        assertEquals("username", registeredUser.getUsername());
+    }
 
-        @Test
-    	public void deleteById_whenDeleteMethod()
-            throws Exception {
+    @Test
+    void testRegisterUser_UsernameExists() {
+        when(userRepository.findByUsername("username")).thenReturn(Optional.of(user));
 
-        Candidate ro = Candidate.builder().id(1L).build();
-        List<Candidate> list = List.of(ro);
-        when(candidateService.findAll() ).thenReturn(list);
+        Exception exception = assertThrows(UsernameNotFoundException.class, () -> {
+            candidateService.registerUser(user);
+        });
 
-        APIResponse apiResponse = new APIResponse();
-        apiResponse.setData("response");
-        apiResponse.setResponseCode(HttpStatus.OK);
-        apiResponse.setMessage("Successfully executed");
-        ResponseEntity<APIResponse> response = new ResponseEntity<>(apiResponse, apiResponse.getResponseCode());
+        assertEquals("User exists", exception.getMessage());
+    }
 
-        RequestBuilder request = MockMvcRequestBuilders
-                .delete("/api/candidate/1")
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .accept(MediaType.APPLICATION_JSON);
+    @Test
+    void testLoginAndGetToken_Success() {
+        String token = "token";
+        Authentication authentication = mock(Authentication.class);
+        when(authenticationManager.authenticate(Mockito.any(UsernamePasswordAuthenticationToken.class))).thenReturn(authentication);
+        when(tokenProvider.createToken(authentication)).thenReturn(token);
 
-        MvcResult result = mvc.perform(request)
-                .andExpect(status().isOk())
-				.andExpect(jsonPath("$.message", Matchers.is("Successfully executed")))
-				.andReturn();
-					
-        assertNotNull(result.getResponse().getContentAsString());
-				
-        }
+        String resultToken = candidateService.loginAndGetToken("username", "password");
+
+        assertEquals(token, resultToken);
+    }
+
+    @Test
+    void testLoginAndGetToken_InvalidCredentials() {
+        when(authenticationManager.authenticate(Mockito.any(UsernamePasswordAuthenticationToken.class))).thenThrow(new RuntimeException("Invalid credentials"));
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            candidateService.loginAndGetToken("username", "wrongpassword");
+        });
+
+        assertEquals("Invalid credentials", exception.getMessage());
+    }
 
 
 }
