@@ -3,7 +3,6 @@ package com.pancho.demo;
 
 import com.pancho.demo.config.TokenProvider;
 import com.pancho.demo.model.*;
-import com.pancho.demo.persistence.AuthorityRepository;
 import com.pancho.demo.persistence.CandidateRepository;
 import com.pancho.demo.persistence.UserRepository;
 import com.pancho.demo.service.CandidateService;
@@ -31,9 +30,6 @@ class DemoApplicationTests {
 
     @Mock
     private CandidateRepository candidateRepository;
-
-    @Mock
-    private AuthorityRepository authorityRepository;
 
     @Mock
     private UserRepository userRepository;
